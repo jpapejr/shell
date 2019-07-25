@@ -3,7 +3,7 @@ FROM ubuntu:latest
 ########################
 ### Start customization
 ########################
-RUN apt update && apt install -y zsh curl unzip wget  \
+RUN apt update && apt install -y zsh curl unzip wget iputils-ping dnsutils  \
     && apt autoremove -y \
     && apt clean -y \
     && rm -rf /var/lib/apt/lists/*
