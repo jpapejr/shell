@@ -3,10 +3,12 @@ FROM ubuntu:latest
 ########################
 ### Start customization
 ########################
-RUN apt update && apt install -y zsh curl unzip wget  \
+RUN apt update && apt install -y zsh curl unzip wget software-properties-common \
     && apt autoremove -y \
     && apt clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+RUN add-apt-repository -y ppa:projectatomic/ppa
 
 RUN curl -sL https://ibm.biz/idt-installer | bash
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
