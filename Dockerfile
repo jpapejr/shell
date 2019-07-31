@@ -11,6 +11,10 @@ RUN apt update && apt install -y zsh curl unzip wget software-properties-common 
 
 RUN add-apt-repository -y ppa:projectatomic/ppa
 
+RUN wget https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz
+RUN tar xvfz openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz \
+    && mv ./openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit/oc /usr/local/bin/oc
+
 RUN curl -sL https://ibm.biz/idt-installer | bash
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 RUN cp /root/.oh-my-zsh/templates/zshrc.zsh-template /root/.zshrc
@@ -29,7 +33,7 @@ RUN cd /usr/local/bin && unzip -d . ngrok.zip
 RUN cd /usr/local/bin/ && tar xvfz /usr/local/bin/k9s.tgz && cd -
 
 RUN dpkg -i /root/bat.deb \
-    && chmod -R +x /usr/local/bin/* \ 
+    && chmod -R +x /usr/local/bin/* \
     && echo "autoload -Uz compinit" >> /root/.zshrc \
     && echo "compinit" >> /root/.zshrc \
     && echo "source <(kubectl completion zsh)" >> /root/.zshrc \
